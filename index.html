@@ -4,93 +4,116 @@
         <meta charset="UTF-8">
         <!--부트스트랩 초기설정-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+        
         <style>
             div{
-                border: 1px solid black;
+                /* border: 1px solid black; */
             }
             #main{
-                width: 80%;
-                margin-right: 10%;
-                margin-left: 10%;
+                position:relative;
+                width: 100vw;     /* 화면 너비의 100% */
+                height: 100vh;    /* 화면 높이의 150% */
+                margin-top: 60px;
                 overflow: hidden;
-                padding: 10px;
+                padding: 30px 90px;
+                background-image: url('images/sunny.jpeg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
             }
-            #main #left{
-                width: 75%;
-                float: left;
-                
+            #main #today{
+                display:block;
+                position:absolute;
+                width: 30%;
+                height: 30%;
+                float:left;
+                background-color: rgba(0, 0, 0, 0.7); /* 검정색, 50% 투명 */
+                color:white;
+                text-align: center;
+                border-radius: 25px;
+                top: 100px;
+                left: 50%;
+                transform: translate(-50%);
             }
-            #left #up{
-                width: 200px;
-                height: 200px;
-                margin-bottom: 20px;
-                margin-left: 100px;
+            #otherDays div{
+                flex: 1;
+                margin: 0 0.5%;
+                width: 16.666%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7); /* 검정색, 50% 투명 */
+                color:white;
+                text-align: center;
+                border-radius: 25px;
             }
-            #left #down div{
-                width: 12%;
+            #main #otherDays{
+                display:flex; /* 자식요소들을 한줄로 정렬 */
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 10px;
+                position:absolute;
+                width:80%;
                 height: 150px;
-                margin-right: 2%;
-                float: left;
-            }
-            #left #down #g {
-                margin-right: 0;
+                bottom: 20%;
+                left: 50%;
+                transform: translate(-50%);
             }
             #main #right{   
                 width: 20%;
                 float: right;
                 height: 400px;
+                background-color: red;
+                visibility: hidden;
             }
         </style>
     </head>
     <body>
         <!--부트스트랩 초기설정-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-        <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                  </li>
-                </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-              </div>
-            </div>
-          </nav>
+        <!--내비게이션바-->
+        <nav class="navbar bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">networkninja</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">networkninja</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">         
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Weather</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Weather Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Clothes</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+        </nav>
+        <!--Weather-->
         <div id="main">
-            <div id="left">
-                <div id="up">
-                    월
+                <div id="today">
+                      월<br>
+                      지역<br>
+                      온도<br>
+                      날씨이미지<br>
+                      미세먼지 농도<br>
+                      날씨이미지
                 </div>
-                <div id="down">
-                    <div id="a">
-                        월
-                    </div>
+                <div id="otherDays">
                     <div id="b">
                         화
                     </div>
@@ -110,7 +133,6 @@
                         일
                     </div>
                 </div>
-            </div>
             <div id="right">
                     right
             </div>
