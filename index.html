@@ -5,66 +5,8 @@
         <!--부트스트랩 초기설정-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-        
         <style>
-            div{
-                /* border: 1px solid black; */
-            }
-            #main{
-                position:relative;
-                width: 100vw;     /* 화면 너비의 100% */
-                height: 100vh;    /* 화면 높이의 150% */
-                margin-top: 60px;
-                overflow: hidden;
-                padding: 30px 90px;
-                background-image: url('images/sunny.jpeg');
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center;
-            }
-            #main #today{
-                display:block;
-                position:absolute;
-                width: 30%;
-                height: 30%;
-                float:left;
-                background-color: rgba(0, 0, 0, 0.7); /* 검정색, 50% 투명 */
-                color:white;
-                text-align: center;
-                border-radius: 25px;
-                top: 100px;
-                left: 50%;
-                transform: translate(-50%);
-            }
-            #otherDays div{
-                flex: 1;
-                margin: 0 0.5%;
-                width: 16.666%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.7); /* 검정색, 50% 투명 */
-                color:white;
-                text-align: center;
-                border-radius: 25px;
-            }
-            #main #otherDays{
-                display:flex; /* 자식요소들을 한줄로 정렬 */
-                justify-content: space-between;
-                align-items: center;
-                padding: 0 10px;
-                position:absolute;
-                width:80%;
-                height: 150px;
-                bottom: 20%;
-                left: 50%;
-                transform: translate(-50%);
-            }
-            #main #right{   
-                width: 20%;
-                float: right;
-                height: 400px;
-                background-color: red;
-                visibility: hidden;
-            }
+          @import url(mystyle.css);
         </style>
     </head>
     <body>
@@ -106,31 +48,67 @@
         <!--Weather-->
         <div id="main">
                 <div id="today">
-                      월<br>
-                      지역<br>
-                      온도<br>
-                      날씨이미지<br>
-                      미세먼지 농도<br>
-                      날씨이미지
+                      <div id="box1">
+                        <div id="date">날짜</div>
+                        <div id="weatherImg">날씨이미지</div>
+                        <div id="status">맑음</div>
+                      </div>
+                      <div id="box2">
+                        <div id="area">지역</div>
+                        <div id="temperature">온도</div>
+                        <div id="min">최저기온</div>
+                        <div id="max">최고기온</div>
+                      </div>
+                      <div id="box3">
+                        <div id="fineDust">미세먼지 농도</div>
+                        <div id="wind">풍속</div>
+                        <div id="humidity">습도</div>
+                        <div id="precipitation">강수량</div>
+                      </div>
+                      
                 </div>
                 <div id="otherDays">
                     <div id="b">
-                        화
+                        <div class="otherDay">
+                          <div class="date">6/4(수)</div>
+                          <div class="weatherImg">날씨이미지</div>
+                          <div class="tempRange">20~25&deg;C</div>
+                        </div>
                     </div>
                     <div id="c">
-                        수
+                      <div class="otherDay">
+                        <div class="date">6/4(수)</div>
+                        <div class="weatherImg">날씨이미지</div>
+                        <div class="tempRange">20~25&deg;C</div>
+                      </div>
                     </div>
                     <div id="d">
-                        목
+                      <div class="otherDay">
+                        <div class="date">6/4(수)</div>
+                        <div class="weatherImg">날씨이미지</div>
+                        <div class="tempRange">20~25&deg;C</div>
+                      </div>
                     </div>
                     <div id="e">
-                        금
+                      <div class="otherDay">
+                        <div class="date">6/4(수)</div>
+                        <div class="weatherImg">날씨이미지</div>
+                        <div class="tempRange">20~25&deg;C</div>
+                      </div>
                     </div>
                     <div id="f">
-                        토
+                      <div class="otherDay">
+                        <div class="date">6/4(수)</div>
+                        <div class="weatherImg">날씨이미지</div>
+                        <div class="tempRange">20~25&deg;C</div>
+                      </div>
                     </div>
                     <div id="g">
-                        일
+                      <div class="otherDay">
+                        <div class="date">6/4(수)</div>
+                        <div class="weatherImg">날씨이미지</div>
+                        <div class="tempRange">20~25&deg;C</div>
+                      </div>
                     </div>
                 </div>
             <div id="right">

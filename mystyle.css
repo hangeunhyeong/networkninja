@@ -1,0 +1,125 @@
+div{
+    border: 2px solid white;
+}
+#main {
+    position: relative;
+    width: 100vw; /* 화면 너비의 100% */
+    height: 100vh; /* 화면 높이의 150% */
+    margin-top: 60px;
+    overflow: hidden;
+    padding: 30px 90px;
+    background-image: url('images/sunny.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#main #today {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    float: left;
+    background-color: rgba(0, 0, 0, 0.7); /* 검정색, 50% 투명 */
+    color: white;
+    text-align: center;
+    border-radius: 25px;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%);
+}
+#main #right {
+    width: 20%;
+    float: right;
+    height: 400px;
+    background-color: red;
+    visibility: hidden;
+}
+#today > div{
+    height:100%;
+}
+#today #box1{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+}
+#box1 #date{
+    height: 28px;
+}
+#box1 #status{
+    height: 56px;
+}
+#box1 #weatherImg{
+    flex: 1;
+}
+#today #box2{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40%;
+}
+#box2 div{
+    display:block;
+    width:100%;
+}
+#box2 #area{
+    display: block;
+    text-align: center;
+    
+}
+#box2 #temperature{
+    display: block;
+    height:100%;
+    text-align: center;
+}
+#box2 > #min,
+#box2 > #max{
+    text-align:center;
+}
+#today #box3{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+#box3 div{
+    flex: 1;
+}
+#main #otherDays {
+    display: flex; /* 자식요소들을 한줄로 정렬 */
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    position: absolute;
+    width: 80%;
+    height: 150px;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%);
+}
+#otherDays > div {
+    flex: 1;
+    margin: 0 0.5%;
+    /* width: 16.666%; */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* 검정색, 50% 투명 */
+    color: white;
+    text-align: center;
+    border-radius: 25px;
+}
+.otherDay{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.date{
+    height: 28px;
+}
+.weatherImg{
+    flex: 1;
+}
+.tempRange{
+    height: 28px;
+}
