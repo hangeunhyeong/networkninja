@@ -1,5 +1,5 @@
 div{
-    border: 2px solid white;
+    /* border: 2px solid white; */
 }
 #main {
     position: relative;
@@ -13,12 +13,12 @@ div{
     background-repeat: no-repeat;
     background-position: center;
 }
-
 #main #today {
     display: flex;
     align-items: center;
     position: absolute;
-    width: 30%;
+    /* width: 30%; */
+    width: 500px;
     height: 30%;
     float: left;
     background-color: rgba(0, 0, 0, 0.7); /* 검정색, 50% 투명 */
@@ -29,21 +29,14 @@ div{
     left: 50%;
     transform: translate(-50%);
 }
-#main #right {
-    width: 20%;
-    float: right;
-    height: 400px;
-    background-color: red;
-    visibility: hidden;
-}
 #today > div{
-    height:100%;
+    height:90%;
+    width: 50%;
 }
 #today #box1{
     display: flex;
     flex-direction: column;
     width: 30%;
-    height: 100%;
 }
 #box1 #date{
     height: 28px;
@@ -59,7 +52,7 @@ div{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 40%;
+    width: 35%;
 }
 #box2 div{
     display:block;
@@ -82,7 +75,7 @@ div{
 #today #box3{
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 35%;
 }
 #box3 div{
     flex: 1;
@@ -122,4 +115,11 @@ div{
 }
 .tempRange{
     height: 28px;
+}
+#main #right {
+    width: 20%;
+    float: right;
+    height: 400px;
+    background-color: red;
+    visibility: hidden;
 }
