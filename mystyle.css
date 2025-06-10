@@ -20,7 +20,6 @@ div{
     /* width: 30%; */
     width: 500px;
     height: 30%;
-    float: left;
     background-color: rgba(0, 0, 0, 0.7); /* 검정색, 50% 투명 */
     color: white;
     text-align: center;
@@ -28,6 +27,20 @@ div{
     top: 100px;
     left: 50%;
     transform: translate(-50%);
+    transition: all 0.5s ease;
+}
+#clothesbtn {
+  background-color: transparent;
+  border: 2px solid white;   /* 테두리 색과 두께 */
+  color: white;              /* 글씨 색 */
+  padding: 6px 12px;         /* 내부 여백 */
+  border-radius: 10px;       /* 모서리 둥글게 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#clothesbtn:hover {
+  background-color: rgba(255, 255, 255, 0.2);  /* 마우스 올렸을 때 살짝 반투명 */
 }
 #today > div{
     height:90%;
@@ -116,10 +129,25 @@ div{
 .tempRange{
     height: 28px;
 }
+/* 옷추천 클릭시 왼쪽으로 이동*/
+#main #today.move-left {
+    left: 15%;
+    transform: none;
+}
+/*옷 추천 박스*/
 #main #right {
-    width: 20%;
-    float: right;
-    height: 400px;
-    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 500px;
+    height: 30%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    border-radius: 25px;
+    top: 100px;
+    right: 15%;
+    transition: all 0.5s ease;
     visibility: hidden;
 }

@@ -25,3 +25,14 @@ function printLocation(position){
       console.log(positionObj); //fetch함수가 백그라운드에서 실행되므로 console.log()가 먼저 실행되는것을 방지
     });
 }
+
+document.addEventListener("DOMContentLoaded",function(){
+        const btn = document.getElementById("clothesbtn");
+        const todayBox = document.getElementById("today");
+        const rightBox = document.getElementById("right");
+
+        btn.addEventListener("click", function(){
+          todayBox.classList.add("move-left");//today 박스 왼쪽으로 이동
+          rightBox.style.visibility = "visible";//옷 추천 박스 보이기
+        });
+      });
