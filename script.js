@@ -15,6 +15,7 @@ function printLocation(position){
     maxTemp : '알 수 없음'
   }
   const apiKey = '92a4c42c2b66cc777171b90a69b4b582'; 
+<<<<<<< HEAD
   const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${positionObj.latitude}&lon=${positionObj.longitude}&appid=${apiKey}&units=metric&lang=kr`;
   fetch(url)
     .then(res=>res.json())
@@ -130,7 +131,28 @@ function findMinTemp(data, date){
     }
   }
   return min;
+=======
+  const url = `http://api.openweathermap.org/data/2.5/weather?lat=${positionObj.latitude}&lon=${positionObj.longitude}&appid=${apiKey}&units=metric&lang=kr`;
+  fetch(url)
+    .then(res=>res.json())
+    .then(data => {
+      positionObj.temp = data.main.temp;
+      positionObj.humidity = data.main.humidity;
+      positionObj.wind = data.wind.speed;
+      positionObj.status = data.weather[0].main;
+      positionObj.rain = data.rain?.['1h'] ?? '현재 강수 없음';
+    });
+    const GeocoderApiKey = '06e9510ec9444d10bd811abb3a9cd425';
+    const GeocoderUrl = `https://api.opencagedata.com/geocode/v1/json?q=${positionObj.latitude}+${positionObj.longitude}&key=${apiKey}&language=ko`
+    fetch(GeocoderUrl)
+      .then(res => res.json())
+      .then(data => {
+        positionObj.city = data.results[0].components.state + " " + data.results[0].components.city;
+        console.log(positionObj); //fetch함수가 백그라운드에서 실행되므로 console.log()가 먼저 실행되는것을 방지
+      })
+>>>>>>> 178423b (위도 경도 도시로 변경)
 }
+
 
 document.addEventListener("DOMContentLoaded",function(){
         const btn = document.getElementById("clothesbtn");
