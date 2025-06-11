@@ -73,6 +73,9 @@ function printLocation(position){
     }else {
       mainDiv.style.backgroundImage = "url('images/sunny.jpeg')"; // 기본은 맑음
     }
+
+    document.getElementById("clothesSuggestion").innerHTML = getClothesByStatus(allInfo[0].status, allInfo[0].temp);
+
     })
 
     
@@ -88,15 +91,16 @@ function printLocation(position){
         // 화면에 정보 표시
         document.getElementById("area").innerHTML = allInfo[0].area;
       });
+
 }
 function statusToKorean(status){
   switch(status){
     case "Thunderstorm":  return "뇌우";  
     case "Drizzle":  return "보슬비";  
     case "Rain":  return "소나기";  
-    case "Snow":  return "눈";  
+    case "Snow":  return "흐림";  
     case "Clear":  return "맑음";  
-    case "Clouds":  return "흐림";  
+    case "Clouds":  return "눈";  
   }
   return status;
 }
@@ -194,7 +198,7 @@ function getWeatherImgByStatus(status) {
 
   if (status.includes("맑음")) {
     iconName = "today_sunny.png";
-  } else if (status.includes("흐림")) {
+  } else if (status.includes("1")) {
     iconName = "today_cloud.png";
   } else if (status.includes("소나기") || status.includes("보슬비")) {
     iconName = "today_rainy.png";
@@ -208,3 +212,58 @@ function getWeatherImgByStatus(status) {
 
   return `<img src="images/${iconName}" alt="${status}" class="weather-icon">`;
 } 
+
+
+function getClothesByStatus(status, temp) {
+  let top = "", bottom = "", etc = "";
+
+  if (status.includes("맑음")) {
+    if (temp >= 25) {
+      top = "반팔";
+      bottom = "반바지";
+      etc = "선크림";
+    } else if (temp >= 15) {
+      top = "셔츠, 가디건";
+      bottom = "면바지";
+      etc = "겉옷";
+    } else {
+      top = "니트, 긴팔";
+      bottom = "청바지";
+      etc = "자켓";
+    }
+  } else if (status.includes("소나기") || status.includes("보슬비")) {
+    top = "방수 재킷";
+    bottom = "면바지";
+    etc = "우산";
+  } else if (status.includes("눈")) {
+    top = "패딩";
+    bottom = "기모 바지";
+    etc = "장갑, 목도리";
+  } else if (status.includes("뇌우")) {
+    top = "비옷";
+    bottom = "긴바지";
+    etc = "우산, 장화";
+  } else {
+    if (temp >= 25) {
+      top = "반팔";
+      bottom = "반바지";
+      etc = "선크림";
+    } else if (temp >= 15) {
+      top = "셔츠, 가디건";
+      bottom = "면바지";
+      etc = "겉옷";
+    } else {
+      top = "니트, 긴팔";
+      bottom = "청바지";
+      etc = "자켓";
+    }
+  }
+
+  return `
+    <div class="clothes-table">
+      <div class="clothes-row"><div class="clothes-label">상의</div><div class="clothes-value">${top}</div></div>
+      <div class="clothes-row"><div class="clothes-label">하의</div><div class="clothes-value">${bottom}</div></div>
+      <div class="clothes-row"><div class="clothes-label">기타</div><div class="clothes-value">${etc}</div></div>
+    </div>
+  `;
+}
