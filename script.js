@@ -26,13 +26,36 @@ function printLocation(position){
     });
 }
 
-document.addEventListener("DOMContentLoaded",function(){
-        const btn = document.getElementById("clothesbtn");
-        const todayBox = document.getElementById("today");
-        const rightBox = document.getElementById("right");
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("clothesbtn");
+  const todayBox = document.getElementById("today");
+  const rightBox = document.getElementById("right");
+  const closeBtn = document.getElementById("closeClothesBtn");
 
-        btn.addEventListener("click", function(){
-          todayBox.classList.add("move-left");//today 박스 왼쪽으로 이동
-          rightBox.style.visibility = "visible";//옷 추천 박스 보이기
-        });
-      });
+  // 열기 버튼 (옷 추천 보여주기)
+  btn.addEventListener("click", function () {
+    todayBox.classList.add("move-left");
+    rightBox.style.visibility = "visible";
+  });
+
+  // X 버튼 (닫기)
+  closeBtn.addEventListener("click", function () {
+    // 1. 옷 추천 박스를 '즉시' 안보이게 + 애니메이션 안 보이게 위치도 고정
+    rightBox.style.visibility = "hidden";
+    rightBox.style.transition = "none"; // 트랜지션 끄기
+    rightBox.style.position = "absolute"; // layout 겹침 방지
+    rightBox.style.right = "-9999px";     // 화면 바깥으로 보내기
+
+    // 2. 약간 텀 두고 todayBox 복귀 (겹치는 시각 효과 제거)
+    requestAnimationFrame(() => {
+      todayBox.classList.remove("move-left");
+
+      // 3. 다시 위치/스타일 초기화 (다음 번 보여줄 준비)
+      setTimeout(() => {
+        rightBox.style.transition = "";    // 트랜지션 복구
+        rightBox.style.position = "";
+        rightBox.style.right = "";
+      }, 300); // 애니메이션 끝난 후 복원 (0.3초 정도면 충분)
+    });
+  });
+});
