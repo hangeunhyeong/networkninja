@@ -76,7 +76,7 @@ function statusToKorean(status){
   switch(status){
     case "Thunderstorm":  return "뇌우";  
     case "Drizzle":  return "보슬비";  
-    case "Rain":  return "소나기"  
+    case "Rain":  return "소나기";  
     case "Snow":  return "눈";  
     case "Clear":  return "맑음";  
     case "Clouds":  return "흐림";  
