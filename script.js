@@ -15,8 +15,7 @@ function printLocation(position){
     maxTemp : '알 수 없음'
   }
   const apiKey = '92a4c42c2b66cc777171b90a69b4b582'; 
-<<<<<<< HEAD
-  const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${positionObj.latitude}&lon=${positionObj.longitude}&appid=${apiKey}&units=metric&lang=kr`;
+  const url = `http://api.openweathermap.org/data/2.5/weather?lat=${positionObj.latitude}&lon=${positionObj.longitude}&appid=${apiKey}&units=metric&lang=kr`;
   fetch(url)
     .then(res=>res.json())
     .then(data => {
@@ -41,26 +40,8 @@ function printLocation(position){
         document.getElementById("precipitation").innerHTML = positionObj.rain;
       else
         document.getElementById("precipitation").innerHTML = positionObj.rain + "mm";
-
-      // 날씨에 따른 배경
-      const status = positionObj.status;
-      const mainDiv = document.getElementById("main");
-
-      if (status.includes("1")) {
-      mainDiv.style.backgroundImage = "url('images/sunny.jpeg')";
-    } else if (status.includes("clouds")) {
-      mainDiv.style.backgroundImage = "url('images/cloudy.png')";
-    } else if (status.includes("rain") || status.includes("shower")) {
-      mainDiv.style.backgroundImage = "url('images/rainy.jpeg')";
-    } else if (status.includes("snowy")) {
-      mainDiv.style.backgroundImage = "url('images/snowy.jpg')";
-    } else if (status.includes("clear sky")) {
-      mainDiv.style.backgroundImage = "url('images/storm.jpg')";
-    } else if (status.includes("mist")) {
-      mainDiv.style.backgroundImage = "url('images/foggy.jpeg')";
-    } else {
-      mainDiv.style.backgroundImage = "url('images/sunny.jpeg')"; // 기본은 맑음
-    }
+      
+      
     })
       
     const GeocoderApiKey = '06e9510ec9444d10bd811abb3a9cd425';
@@ -70,87 +51,7 @@ function printLocation(position){
       .then(data => {
         positionObj.area = data.results[0].components.state + " " + data.results[0].components.city;
         console.log(positionObj); //fetch함수가 백그라운드에서 실행되므로 console.log()가 먼저 실행되는것을 방지
-        
-        // 화면에 정보 표시
-        document.getElementById("area").innerHTML = positionObj.area;
-      });
-    
-    
-}
-
-function statusToKorean(status){
-  switch(status){
-    case "Thunderstorm":  return "뇌우";  
-    case "Drizzle":  return "보슬비";  
-    case "Rain":  return "소나기"  
-    case "Snow":  return "눈";  
-    case "Clear":  return "맑음";  
-    case "Clouds":  return "흐림";  
-  }
-  return status;
-}
-
-// yyyy-MM-dd 형식으로 출력
-function getDate(){
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = ('0' + (today.getMonth() + 1)).slice(-2);
-  const day = ('0' + (today.getDate())).slice(-2);
-
-  return year + '-' + month + '-' + day;
-}
-
-// MM/dd 형식으로 출력
-function getSimpleDate(){
-  const today = new Date();
-  const month = ('0' + (today.getMonth() + 1)).slice(-2);
-  const day = ('0' + (today.getDate())).slice(-2);
-
-  return month + '/' + day;
-}
-
-function findMaxTemp(data, date){
-  let max = -1000;
-  for(i = 0; i < data.list.length; i++){
-    if(data.list[i].dt_txt.split(" ")[0] == date){
-      if(max < data.list[i].main.temp_max){
-        max = data.list[i].main.temp_max;
-      }
-    }
-  }
-  return max;
-}
-
-function findMinTemp(data, date){
-  let min = 1000;
-  for(i = 0; i < data.list.length; i++){
-    if(data.list[i].dt_txt.split(" ")[0] == date){
-      if(min > data.list[i].main.temp_min){
-        min = data.list[i].main.temp_min;
-      }
-    }
-  }
-  return min;
-=======
-  const url = `http://api.openweathermap.org/data/2.5/weather?lat=${positionObj.latitude}&lon=${positionObj.longitude}&appid=${apiKey}&units=metric&lang=kr`;
-  fetch(url)
-    .then(res=>res.json())
-    .then(data => {
-      positionObj.temp = data.main.temp;
-      positionObj.humidity = data.main.humidity;
-      positionObj.wind = data.wind.speed;
-      positionObj.status = data.weather[0].main;
-      positionObj.rain = data.rain?.['1h'] ?? '현재 강수 없음';
-    });
-    const GeocoderApiKey = '06e9510ec9444d10bd811abb3a9cd425';
-    const GeocoderUrl = `https://api.opencagedata.com/geocode/v1/json?q=${positionObj.latitude}+${positionObj.longitude}&key=${apiKey}&language=ko`
-    fetch(GeocoderUrl)
-      .then(res => res.json())
-      .then(data => {
-        positionObj.city = data.results[0].components.state + " " + data.results[0].components.city;
-        console.log(positionObj); //fetch함수가 백그라운드에서 실행되므로 console.log()가 먼저 실행되는것을 방지
       })
->>>>>>> 178423b (위도 경도 도시로 변경)
 }
 
 
