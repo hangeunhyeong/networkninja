@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Pretendard', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(#e0f7fa, #ffffff);
+  color: #333;
+}
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.weather-box {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.person-figure {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+.arrows button {
+  font-size: 1.2rem;
+  margin: 0 10px;
+  cursor: pointer;
+  background-color: #0097a7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+.outfit {
+  margin-top: 15px;
+  font-size: 1rem;
+}
+.slider {
+  margin-top: 20px;
+}
+.slider input {
+  width: 100%;
+}
+.comment-box {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 320px;
+  height: 400px;
+  overflow-y: auto;
+}
+.comment-box strong {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.comment-input {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.comment-input input {
+  flex: 1;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px 0 0 10px;
+}
+.comment-input button {
+  padding: 8px 15px;
+  background: #0097a7;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+}
