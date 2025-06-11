@@ -11,6 +11,7 @@ div{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    background-image: url(./images/sunny.jpeg);
 }
 #main #today {
     display: flex;
