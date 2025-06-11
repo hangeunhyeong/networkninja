@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>🌦 네트워크닌자 옷차림 추천</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Pretendard', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .weather-box {
+      background: white;
+      border-radius: 20px;
+      padding: 30px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 320px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .weather-box:hover {
+      transform: scale(1.02);
+    }
+    .person-figure {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+    }
+    .outfit {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 10px;
+      background-color: #e0f7fa;
+      border-radius: 12px;
+      transition: background-color 0.3s;
+    }
+    .slider {
+      margin-top: 25px;
+    }
+    .slider label {
+      font-weight: bold;
+    }
+    .slider input {
+      width: 100%;
+      margin-top: 10px;
+    }
+    .comment-box {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 320px;
+      height: 400px;
+      overflow-y: auto;
+    }
+    .comment-box strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .comment-input {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .comment-input input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 10px 0 0 10px;
+    }
+    .comment-input button {
+      padding: 10px 20px;
+      background: #0097a7;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 0 10px 10px 0;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .comment-input button:hover {
+      background-color: #007c91;
+    }
+    p {
+      margin: 10px 0;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🌈 네트워크닌자의 날씨별 옷차림 추천 💫</h1>
+
+<div class="container">
+  <div class="weather-box">
+    <div class="person-figure">👤</div>
+    <div class="outfit" id="outfit"></div>
+    <div class="slider">
+      <label>🌡 현재 온도: <span id="tempValue">20℃</span></label><br>
+      <input type="range" id="tempSlider" min="-10" max="50" value="20" oninput="updateOutfit()">
+    </div>
+  </div>
+
+  <div class="comment-box" id="comments">
+    <strong>💬 사용자 댓글</strong>
+  </div>
+</div>
+
+<div class="comment-input">
+  <input type="text" id="commentText" placeholder="댓글을 입력하세요~" onkeypress="handleKeyPress(event)">
+  <button onclick="addComment()">등록</button>
+</div>
+
+<script>
+  const outfits = [
+    { temp: -10, text: "❄️ 두꺼운 패딩 + 내복 + 귀마개" },
+    { temp: 0, text: "🧥 패딩 + 장갑 + 털모자" },
+    { temp: 10, text: "🧣 코트 + 니트 + 청바지" },
+    { temp: 20, text: "👕 긴팔 + 가디건 + 면바지" },
+    { temp: 30, text: "👕 반팔 + 반바지 + 샌들" },
+    { temp: 40, text: "🩳 민소매 + 얇은 바지 + 모자" },
+    { temp: 50, text: "🔥 초경량 옷 + 물 자주 마시기 + 선크림" }
+  ];
+  let current = 3;
+
+  function updateOutfit() {
+    const temp = parseInt(document.getElementById("tempSlider").value);
+    document.getElementById("tempValue").textContent = temp + "℃";
+    const outfit = outfits.reduce((prev, curr) =>
+      Math.abs(curr.temp - temp) < Math.abs(prev.temp - temp) ? curr : prev
+    );
+    document.getElementById("outfit").textContent = `추천 옷차림: ${outfit.text}`;
+    current = outfits.indexOf(outfit);
+  }
+
+  function addComment() {
+    const text = document.getElementById("commentText").value;
+    if (text.trim() !== "") {
+      const box = document.getElementById("comments");
+      const p = document.createElement("p");
+      p.textContent = text;
+      box.appendChild(p);
+      document.getElementById("commentText").value = "";
+      box.scrollTop = box.scrollHeight;
+    }
+  }
+
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      addComment();
+    }
+  }
+
+  updateOutfit();
+</script>
+
+</body>
+</html>
