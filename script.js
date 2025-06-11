@@ -45,19 +45,17 @@ function printLocation(position){
       const status = positionObj.status;
       const mainDiv = document.getElementById("main");
 
-      if (status.includes("1")) {
+      if (status.includes("맑음")) {
       mainDiv.style.backgroundImage = "url('images/sunny.jpeg')";
-    } else if (status.includes("clouds")) {
+    } else if (status.includes("흐림")) {
       mainDiv.style.backgroundImage = "url('images/cloudy.png')";
-    } else if (status.includes("rain") || status.includes("shower")) {
+    } else if (status.includes("소나기") || status.includes("보슬비")) {
       mainDiv.style.backgroundImage = "url('images/rainy.jpeg')";
-    } else if (status.includes("snowy")) {
+    } else if (status.includes("눈")) {
       mainDiv.style.backgroundImage = "url('images/snowy.jpg')";
-    } else if (status.includes("clear sky")) {
+    } else if (status.includes("뇌우")) {
       mainDiv.style.backgroundImage = "url('images/storm.jpg')";
-    } else if (status.includes("mist")) {
-      mainDiv.style.backgroundImage = "url('images/foggy.jpeg')";
-    } else {
+    }else {
       mainDiv.style.backgroundImage = "url('images/sunny.jpeg')"; // 기본은 맑음
     }
     })
