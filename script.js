@@ -37,11 +37,12 @@ function printLocation(position){
         allInfo[i].minTemp = findMinTemp(data, today);
       }
       
-      // 화면에 정보 표시
+      // 화면에 정보 표시(main)
       document.getElementById("temperature").innerHTML = allInfo[0].temp + "&deg;C";
       document.getElementById("humidity").innerHTML = allInfo[0].humidity + "%";
       document.getElementById("wind").innerHTML = allInfo[0].wind + "m/s";
       document.getElementById("status").innerHTML = allInfo[0].status;
+      document.getElementById("weatherImg").innerHTML = getWeatherImgByStatus(allInfo[0].status);
       document.getElementById("date").innerHTML = getSimpleDate(allInfo[0].date);
       document.getElementById("min").innerHTML = Math.round(allInfo[0].minTemp) + '~' + Math.round(allInfo[0].maxTemp) + "&deg;C";
       if(allInfo[0].rain == "현재 강수 없음")
