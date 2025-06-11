@@ -1,55 +1,64 @@
+class WeatherInfo {
+  constructor(latitude, longitude, extra) {
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.temp = '알 수 없음';
+    this.humidity = '알 수 없음';
+    this.wind = '알 수 없음';
+    this.status = '알 수 없음';
+    this.area = '알 수 없음';
+    this.fineDust = '알 수 없음';
+    this.rain = '알 수 없음';
+    this.date = getDate(extra);
+    this.minTemp = '알 수 없음';
+    this.maxTemp = '알 수 없음';
+  }
+}
+let allInfo = new Array(5);
 navigator.geolocation.getCurrentPosition(printLocation);
 function printLocation(position){
-  const positionObj = {
-    latitude: position.coords.latitude,
-    longitude: position.coords.longitude,
-    temp: '알 수 없음',
-    humidity: '알 수 없음',
-    wind: '알 수 없음',
-    status: '알 수 없음',
-    area: '알 수 없음',
-    fineDust: '알 수 없음', 
-    rain: '알 수 없음',
-    today: getDate(),
-    minTemp : '알 수 없음',
-    maxTemp : '알 수 없음'
-  }
   const apiKey = '92a4c42c2b66cc777171b90a69b4b582'; 
-  const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${positionObj.latitude}&lon=${positionObj.longitude}&appid=${apiKey}&units=metric&lang=kr`;
+  const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric&lang=kr`;
   fetch(url)
     .then(res=>res.json())
     .then(data => {
-      positionObj.temp = data.list[0].main.temp;
-      positionObj.humidity = data.list[0].main.humidity;
-      positionObj.wind = data.list[0].wind.speed;
-      positionObj.status = statusToKorean(data.list[0].weather[0].main);
-      positionObj.rain = data.list[0].rain?.['3h'] ?? '현재 강수 없음';
+      for(let i = 0; i < 5; i++){
+        allInfo[i] = new WeatherInfo(position.coords.latitude, position.coords.longitude, i);
+        let idx = getIdxByDate(data, allInfo[i].date);
+        console.log(idx);
+        allInfo[i].temp = data.list[idx].main.temp;
+        allInfo[i].humidity = data.list[idx].main.humidity;
+        allInfo[i].wind = data.list[idx].wind.speed;
+        allInfo[i].status = statusToKorean(data.list[idx].weather[0].main);
+        allInfo[i].rain = data.list[idx].rain?.['3h'] ?? '현재 강수 없음';
 
-      const today = positionObj.today;
-      positionObj.maxTemp = findMaxTemp(data, today);
-      positionObj.minTemp = findMinTemp(data, today);
-
-      // 화면에 정보 표시
-      document.getElementById("temperature").innerHTML = positionObj.temp + "&deg;C";
-      document.getElementById("humidity").innerHTML = positionObj.humidity + "%";
-      document.getElementById("wind").innerHTML = positionObj.wind + "m/s";
-      document.getElementById("status").innerHTML = positionObj.status;
-      document.getElementById("date").innerHTML = getSimpleDate();
-      document.getElementById("min").innerHTML = Math.round(positionObj.minTemp) + '~' + Math.round(positionObj.maxTemp) + "&deg;C";
-      if(positionObj.rain == "현재 강수 없음")
-        document.getElementById("precipitation").innerHTML = positionObj.rain;
-      else
-        document.getElementById("precipitation").innerHTML = positionObj.rain + "mm";
-
-      // 날씨에 따른 배경 + 날씨 이미지 변경
-      const status = positionObj.status;
-      const mainDiv = document.getElementById("main");
-      const weatherImg = document.getElementById("weatherImg");
+        let today = allInfo[i].date;
+        allInfo[i].maxTemp = findMaxTemp(data, today);
+        allInfo[i].minTemp = findMinTemp(data, today);
+      }
       
-      //날씨 이미지 변경
-      weatherImg.innerHTML = getWeatherImgByStatus(status);
+      // 화면에 정보 표시
+      document.getElementById("temperature").innerHTML = allInfo[0].temp + "&deg;C";
+      document.getElementById("humidity").innerHTML = allInfo[0].humidity + "%";
+      document.getElementById("wind").innerHTML = allInfo[0].wind + "m/s";
+      document.getElementById("status").innerHTML = allInfo[0].status;
+      document.getElementById("date").innerHTML = getSimpleDate(allInfo[0].date);
+      document.getElementById("min").innerHTML = Math.round(allInfo[0].minTemp) + '~' + Math.round(allInfo[0].maxTemp) + "&deg;C";
+      if(allInfo[0].rain == "현재 강수 없음")
+        document.getElementById("precipitation").innerHTML = allInfo[0].rain;
+      else
+        document.getElementById("precipitation").innerHTML = allInfo[0].rain + "mm";
 
-      //배경 변경
+      //화면에 정보 표시(sub)
+      for(let i = 1; i < 5; i++){
+        document.getElementById("day" + i).getElementsByClassName("date")[0].innerHTML = getSimpleDate(allInfo[i].date);
+        document.getElementById("day" + i).getElementsByClassName("weatherImg")[0].innerHTML = getWeatherImgByStatus(allInfo[i].status);
+        document.getElementById("day" + i).getElementsByClassName("tempRange")[0].innerHTML = Math.round(allInfo[i].minTemp) + '~' + Math.round(allInfo[i].maxTemp) + "&deg;C";
+      }
+      // 날씨에 따른 배경
+      let status = allInfo[0].status;
+      let mainDiv = document.getElementById("main");
+
       if (status.includes("맑음")) {
       mainDiv.style.backgroundImage = "url('images/sunny.jpeg')";
     } else if (status.includes("흐림")) {
@@ -68,15 +77,15 @@ function printLocation(position){
     
       
     const GeocoderApiKey = '06e9510ec9444d10bd811abb3a9cd425';
-    const GeocoderUrl = `https://api.opencagedata.com/geocode/v1/json?q=${positionObj.latitude}+${positionObj.longitude}&key=${GeocoderApiKey}&language=ko`
+    const GeocoderUrl = `https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=${GeocoderApiKey}&language=ko`
     fetch(GeocoderUrl)
       .then(res => res.json())
       .then(data => {
-        positionObj.area = data.results[0].components.state + " " + data.results[0].components.city;
-        console.log(positionObj); //fetch함수가 백그라운드에서 실행되므로 console.log()가 먼저 실행되는것을 방지
+        allInfo[0].area = data.results[0].components.state + " " + data.results[0].components.city;
+        console.log(allInfo[0]); //fetch함수가 백그라운드에서 실행되므로 console.log()가 먼저 실행되는것을 방지
         
         // 화면에 정보 표시
-        document.getElementById("area").innerHTML = positionObj.area;
+        document.getElementById("area").innerHTML = allInfo[0].area;
       });
 }
 function statusToKorean(status){
@@ -92,8 +101,9 @@ function statusToKorean(status){
 }
 
 // yyyy-MM-dd 형식으로 출력
-function getDate(){
+function getDate(extra){
   const today = new Date();
+  today.setDate(today.getDate() + extra);
   const year = today.getFullYear();
   const month = ('0' + (today.getMonth() + 1)).slice(-2);
   const day = ('0' + (today.getDate())).slice(-2);
@@ -102,14 +112,26 @@ function getDate(){
 }
 
 // MM/dd 형식으로 출력
-function getSimpleDate(){
-  const today = new Date();
-  const month = ('0' + (today.getMonth() + 1)).slice(-2);
-  const day = ('0' + (today.getDate())).slice(-2);
-
-  return month + '/' + day;
+function getSimpleDate(date){
+  return date.split("-")[1] + '/' + date.split("-")[2];
 }
-
+function getIdxByDate(data, date){
+  for(i = 0; i < data.list.length; i++){
+    
+    if(data.list[i].dt_txt.split(" ")[0] == date){
+      //오늘
+      if(i == 0){
+        return i;
+      }
+      //오늘이 아닌 경우
+      else{
+        if(data.list[i].dt_txt.split(" ")[1] == "15:00:00"){
+          return i;
+        }
+      }
+    }
+  }
+}
 function findMaxTemp(data, date){
   let max = -1000;
   for(i = 0; i < data.list.length; i++){
