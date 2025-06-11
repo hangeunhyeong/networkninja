@@ -12,7 +12,7 @@ function printLocation(position){
     rain: '알 수 없음',
   }
   const apiKey = '';
-  const url = `http://api.openweathermap.org/data/2.5/weather?lat=${positionObj.latitude}&lon=${positionObj.longitude}&appid=${apiKey}&units=metric&lang=kr`;
+  const url = `http://api.openweathermap.org/data/2.5/weather?lat=${positionObj.latitude}&lon=${positionObj.longitude}&appid=${apiKey}&units=metric&lang=en`;
   fetch(url)
     .then(res=>res.json())
     .then(data => {
@@ -22,6 +22,25 @@ function printLocation(position){
       positionObj.status = data.weather[0].description;
       positionObj.city = data.name;
       positionObj.rain = data.rain?.['1h'] ?? '현재 강수 없음';
+      // 날씨에 따른 배경
+      const status = positionObj.status;
+      const mainDiv = document.getElementById("main");
+
+      if (status.includes("1")) {
+      mainDiv.style.backgroundImage = "url('images/sunny.jpeg')";
+    } else if (status.includes("clouds")) {
+      mainDiv.style.backgroundImage = "url('images/cloudy.png')";
+    } else if (status.includes("rain") || status.includes("shower")) {
+      mainDiv.style.backgroundImage = "url('images/rainy.jpeg')";
+    } else if (status.includes("snowy")) {
+      mainDiv.style.backgroundImage = "url('images/snowy.jpg')";
+    } else if (status.includes("clear sky")) {
+      mainDiv.style.backgroundImage = "url('images/storm.jpg')";
+    } else if (status.includes("mist")) {
+      mainDiv.style.backgroundImage = "url('images/foggy.jpeg')";
+    } else {
+      mainDiv.style.backgroundImage = "url('images/sunny.jpeg')"; // 기본은 맑음
+    }
       console.log(positionObj); //fetch함수가 백그라운드에서 실행되므로 console.log()가 먼저 실행되는것을 방지
     });
 }
