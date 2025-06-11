@@ -104,4 +104,26 @@
         </div>
         <script src="script.js"></script>
     </body>
+  <header>
+    <h1>날씨 상세정보 대시보드</h1>
+  </header>
+
+  <!-- 메트릭 선택 메뉴 -->
+  <nav id="metric-menu">
+    <button data-metric="temperature">기온</button>
+    <button data-metric="precipitation">강수량</button>
+    <button data-metric="humidity">수증기량</button>
+    <button data-metric="pop">비올 확률</button>
+    <button data-metric="uvi">자외선 지수</button>
+    <button data-metric="pm">미세먼지 지수</button>
+    <button data-metric="wind">바람 속도</button>
+    <button data-metric="windDir">풍향</button>
+  </nav>
+
+  <!-- 차트 출력 영역 -->
+  <main id="chart-container">
+    <canvas id="metricChart"></canvas>
+  </main>
+<script src="script.js"></script>
+</body>
 </html>
