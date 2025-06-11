@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded",function(){
         const btn = document.getElementById("clothesbtn");
         const todayBox = document.getElementById("today");
         const rightBox = document.getElementById("right");
+        const closeBtn = document.getElementById("closeClothesBtn");
 
         btn.addEventListener("click", function(){
           todayBox.classList.add("move-left");//today 박스 왼쪽으로 이동
