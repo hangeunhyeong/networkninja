@@ -338,9 +338,10 @@ function getClothesByStatus(status, temp) {
     }
 
     // 버튼 클릭 이벤트 바인딩
-    document.querySelectorAll('#metric-menu button').forEach(btn => {
+        document.querySelectorAll('#metric-menu button').forEach(btn => {
       btn.addEventListener('click', () => updateChart(btn.dataset.metric));
     });
 
     // 첫 화면은 기온 데이터 표시
     updateChart('temperature');
+
