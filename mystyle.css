@@ -59,6 +59,14 @@ div{
 }
 #box1 #weatherImg{
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+#weatherImg .weather-icon {
+  width: 80px;
+  height: 80px;
 }
 #today #box2{
     display: flex;

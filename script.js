@@ -41,10 +41,31 @@ function printLocation(position){
       else
         document.getElementById("precipitation").innerHTML = positionObj.rain + "mm";
 
-      // 날씨에 따른 배경
+      // 날씨에 따른 배경 + 날씨 이미지 변경
       const status = positionObj.status;
       const mainDiv = document.getElementById("main");
+      const weatherImg = document.getElementById("weatherImg");
+      let iconName = "";
 
+      // 날씨 이미지 변경경
+      if (status.includes("맑음")) {
+        iconName = "today_sunny.png";
+      } else if (status.includes("흐림")) {
+        iconName = "today_cloud.png";
+      } else if (status.includes("소나기") || status.includes("보슬비")) {
+        iconName = "today_rainy.png";
+      } else if (status.includes("눈")) {
+        iconName = "today_snow.png";
+      } else if (status.includes("뇌우")) {
+        iconName = "today_storm.png";
+      } else {
+        iconName = "today_sunny.png"; // 기본 아이콘
+      }
+
+      // 아이콘 이미지를 weatherImg div에 삽입
+      weatherImg.innerHTML = `<img src="images/${iconName}" alt="${status}" class="weather-icon">`;
+
+      //배경 변경경
       if (status.includes("맑음")) {
       mainDiv.style.backgroundImage = "url('images/sunny.jpeg')";
     } else if (status.includes("흐림")) {
