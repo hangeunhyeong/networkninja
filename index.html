@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>🌦 네트워크닌자 옷차림 추천</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>네트워크닌자의 날씨별 옷차림 추천 </h1>
+
+<div class="container">
+  <!-- 옷차림 박스 -->
+  <div class="weather-box">
+    <div class="person-figure">👤</div>
+    <div class="arrows">
+      <button onclick="prevOutfit()">← 이전</button>
+      <button onclick="nextOutfit()">다음 →</button>
+    </div>
+    <div class="outfit" id="outfit"></div>
+    <div class="slider">
+      <label>🌡 현재 온도: <span id="tempValue">20℃</span></label><br>
+      <input type="range" id="tempSlider" min="0" max="40" value="20" oninput="updateOutfit()">
+    </div>
+  </div>
+
+  <!-- 댓글 박스 -->
+  <div class="comment-box" id="comments">
+    <strong>💬 사용자 댓글</strong>
+  </div>
+</div>
+
+<!-- 댓글 입력창 -->
+<div class="comment-input">
+  <input type="text" id="commentText" placeholder="댓글을 입력하세요~">
+  <button onclick="addComment()">등록</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
