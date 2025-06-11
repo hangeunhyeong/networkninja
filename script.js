@@ -38,7 +38,7 @@ function printLocation(position){
       }
       
       // 화면에 정보 표시(main)
-      document.getElementById("temperature").innerHTML = allInfo[0].temp + "&deg;C";
+      document.getElementById("temperature").innerHTML = allInfo[0].temp.toFixed(1) + document.getElementById("temperature").innerHTML;
       document.getElementById("humidity").innerHTML = allInfo[0].humidity + "%";
       document.getElementById("wind").innerHTML = allInfo[0].wind + "m/s";
       document.getElementById("status").innerHTML = allInfo[0].status;
@@ -63,7 +63,7 @@ function printLocation(position){
       if (status.includes("맑음")) {
       mainDiv.style.backgroundImage = "url('images/sunny.jpeg')";
     } else if (status.includes("흐림")) {
-      mainDiv.style.backgroundImage = "url('images/cloudy.png')";
+      mainDiv.style.backgroundImage = "url('images/cloudy.jpg')";
     } else if (status.includes("소나기") || status.includes("보슬비")) {
       mainDiv.style.backgroundImage = "url('images/rainy.jpeg')";
     } else if (status.includes("눈")) {

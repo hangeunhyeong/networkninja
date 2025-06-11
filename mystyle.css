@@ -1,5 +1,8 @@
+body{
+    font-weight:100;
+}
 div{
-    border: 2px solid white;
+    /* border: 2px solid white; */
 }
 #main {
     position: relative;
@@ -50,11 +53,16 @@ div{
     display: flex;
     flex-direction: column;
     width: 30%;
+    border: none;             /* 모든 테두리 제거 */
+    border-right: 0.5px solid white; /* 오른쪽 테두리만 설정 */
 }
 #box1 #date{
     height: 28px;
 }
 #box1 #status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 56px;
 }
 #box1 #weatherImg{
@@ -74,6 +82,8 @@ div{
     justify-content: flex-start;
     align-items: center;
     width: 35%;
+    border: none;             /* 모든 테두리 제거 */
+    border-right: 0.5px solid white; /* 오른쪽 테두리만 설정 */
 }
 #box2 div{
     display:block;
@@ -85,13 +95,19 @@ div{
     
 }
 #box2 #temperature{
-    display: block;
-    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    font-weight:500;
+    font-size: 3em;
+    /* border:1px solid red; */
+    margin-top: 20px;
 }
-#box2 > #min,
-#box2 > #max{
+#box2 > #min{
     text-align:center;
+    margin-top:5px;
+    margin-bottom: 20px;
 }
 #today #box3{
     display: flex;
@@ -151,7 +167,7 @@ div{
     width: 500px;
     height: 30%;
     background-color: rgba(0, 0, 0, 0.7);
-    color: white;
+
     text-align: center;
     border-radius: 25px;
     top: 100px;
