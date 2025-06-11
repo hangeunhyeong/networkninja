@@ -98,9 +98,9 @@ function statusToKorean(status){
     case "Thunderstorm":  return "뇌우";  
     case "Drizzle":  return "보슬비";  
     case "Rain":  return "소나기";  
-    case "Snow":  return "흐림";  
+    case "Snow":  return "눈";  
     case "Clear":  return "맑음";  
-    case "Clouds":  return "눈";  
+    case "Clouds":  return "흐림";  
   }
   return status;
 }
@@ -198,7 +198,7 @@ function getWeatherImgByStatus(status) {
 
   if (status.includes("맑음")) {
     iconName = "today_sunny.png";
-  } else if (status.includes("1")) {
+  } else if (status.includes("흐림")) {
     iconName = "today_cloud.png";
   } else if (status.includes("소나기") || status.includes("보슬비")) {
     iconName = "today_rainy.png";
